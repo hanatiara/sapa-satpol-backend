@@ -70,5 +70,27 @@ class AuthController extends Controller
     ]);
 }
 
+    public function updateAccountStatus(Request $request) {
+        $masyarakat = Masyarakat::where('id_nik', $request->id_nik)->first();
+
+        if (!$masyarakat) {
+            return response()->json([
+                'message' => 'Data masyarakat tidak ditemukan.'
+            ], 404);
+        }
+
+        $masyarakat->account_status = $request->account_status;
+
+        $masyarakat->save();
+
+        return response()->json([
+            'message' => 'Status akun berhasil diperbarui.',
+            'masyarakat' => $masyarakat,
+        ]);
+    }
+
+    public function UpdateProfile(Request $request) {
+
+    }
 
 }
