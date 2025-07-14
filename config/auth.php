@@ -42,6 +42,13 @@ return [
         ],
     ],
 
+    'providers' => [
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Masyarakat::class,
+    ],
+],
+
     /*
     |--------------------------------------------------------------------------
     | User Providers
