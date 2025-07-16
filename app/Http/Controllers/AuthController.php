@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Masyarakat;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -53,14 +52,12 @@ class AuthController extends Controller
         ], 401);
     }
 
-    // ✅ Check if model exists
     if (!$masyarakat->exists) {
         return response()->json([
             'message' => 'Login gagal. Data tidak valid.'
         ], 500);
     }
 
-    // ✅ This should now work
     $token = $masyarakat->createToken('api_token')->plainTextToken;
 
     return response()->json([
@@ -90,6 +87,7 @@ class AuthController extends Controller
     }
 
     public function UpdateProfile(Request $request) {
+
 
     }
 

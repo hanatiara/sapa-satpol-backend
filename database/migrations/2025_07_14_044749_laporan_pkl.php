@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('laporan', function (Blueprint $table) {
+        Schema::create('laporan_pkl', function (Blueprint $table) {
             $table->uuid("id_laporan");
-            $table->string("personil");
-            $table->dateTime("tanggal");
+            $table->string("jenis_pkl");
+            $table->string("jenis_pelanggaran");
+            $table->string("jenis_tindakan");
+            $table->string("keterangan");
+            $table->string("url_dokumentasi");
         });
     }
 
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('laporan');
+        Schema::dropIfExists('laporan_pkl');
     }
 };
