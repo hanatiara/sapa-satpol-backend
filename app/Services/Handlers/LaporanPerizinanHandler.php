@@ -34,4 +34,9 @@ class LaporanPerizinanHandler implements LaporanHandlerInterface
             'url_dokumentasi' => $data['url_dokumentasi'] ?? null,
         ]);
     }
+
+     public function delete(Laporan $laporan): void
+    {
+        $laporan->laporanPerizinan()->delete();
+    }
 }

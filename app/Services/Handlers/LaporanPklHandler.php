@@ -32,4 +32,9 @@ class LaporanPklHandler implements LaporanHandlerInterface
             'url_dokumentasi' => $data['url_dokumentasi'] ?? null,
         ]);
     }
+
+     public function delete(Laporan $laporan): void
+    {
+        $laporan->laporanPkl()->delete();
+    }
 }

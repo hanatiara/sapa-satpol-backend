@@ -19,6 +19,7 @@ Route::get('/show-laporan-masuk', [LaporanController::class, 'showToday']);
 # Using DP
 Route::post('/create-laporan', [LaporanController::class, 'createLaporan']);
 Route::post('/update-laporan', [LaporanController::class, 'updateLaporan']);
+Route::delete('/delete-laporan', [LaporanController::class, 'deleteLaporan']);
 
 
 

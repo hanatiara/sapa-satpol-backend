@@ -39,5 +39,9 @@ class LaporanReklameHandler implements LaporanHandlerInterface
 
     }
 
+    public function delete(Laporan $laporan): void
+    {
+        $laporan->laporanReklame()->delete();
+    }
 
 }

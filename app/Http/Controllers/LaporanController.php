@@ -94,5 +94,31 @@ class LaporanController extends Controller
         ], 201);
 
     }
+
+    public function deleteLaporan(Request $request, LaporanHandlerResolver $resolver) {
+        $laporan = Laporan::find($request->id_laporan);
+
+        if (!$laporan) {
+            return response()->json(['message' => 'Laporan not found'], 404);
+        }
+
+        $type = null;
+
+        foreach ($this->relationMap as $key => $relation) {
+            if ($laporan->$relation()->exists()) {
+                $type = $key;
+                break;
+            }
+        }
+
+        if (!$type) {
+            return response()->json(['message' => 'Unable to determine laporan type'], 400);
+        }
+
+        $handler = $resolver->resolveByType($type);
+        $handler->delete($laporan);
+        $laporan->delete();
+        return response()->json(['message' => 'Laporan deleted successfully'], 200);
+        }
 }
 
