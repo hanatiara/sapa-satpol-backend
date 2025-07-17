@@ -8,6 +8,8 @@ class Laporan extends Model
 {
     protected $table = 'laporan';
     protected $primaryKey = 'id_laporan';
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     public $timestamps = false;
 
