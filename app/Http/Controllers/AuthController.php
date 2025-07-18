@@ -37,35 +37,35 @@ class AuthController extends Controller
         ], 201);
     }
 
-    public function login(Request $request)
-{
-    $request->validate([
-        'email_masyarakat' => 'required|email',
-        'password' => 'required|string',
-    ]);
+        public function login(Request $request)
+    {
+        $request->validate([
+            'email_masyarakat' => 'required|email',
+            'password' => 'required|string',
+        ]);
 
-    $masyarakat = Masyarakat::where('email_masyarakat', $request->email_masyarakat)->first();
+        $masyarakat = Masyarakat::where('email_masyarakat', $request->email_masyarakat)->first();
 
-    if (!$masyarakat || !Hash::check($request->password, $masyarakat->password)) {
+        if (!$masyarakat || !Hash::check($request->password, $masyarakat->password)) {
+            return response()->json([
+                'message' => 'Email atau password salah.'
+            ], 401);
+        }
+
+        if (!$masyarakat->exists) {
+            return response()->json([
+                'message' => 'Login gagal. Data tidak valid.'
+            ], 500);
+        }
+
+        $token = $masyarakat->createToken('api_token')->plainTextToken;
+
         return response()->json([
-            'message' => 'Email atau password salah.'
-        ], 401);
+            'masyarakat' => $masyarakat,
+            'token' => $token,
+            'message' => 'Login berhasil'
+        ]);
     }
-
-    if (!$masyarakat->exists) {
-        return response()->json([
-            'message' => 'Login gagal. Data tidak valid.'
-        ], 500);
-    }
-
-    $token = $masyarakat->createToken('api_token')->plainTextToken;
-
-    return response()->json([
-        'masyarakat' => $masyarakat,
-        'token' => $token,
-        'message' => 'Login berhasil'
-    ]);
-}
 
     public function updateAccountStatus(Request $request) {
         $masyarakat = Masyarakat::where('id_nik', $request->id_nik)->first();
@@ -87,6 +87,8 @@ class AuthController extends Controller
     }
 
     public function UpdateProfile(Request $request) {
+        $id_nik = $request->id_nik;
+
 
 
     }
