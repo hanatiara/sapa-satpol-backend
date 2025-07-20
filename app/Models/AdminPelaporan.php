@@ -7,17 +7,17 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class SuperAdmin extends Authenticatable
+class AdminPelaporan extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-     protected $table = 'super_admin';
+     protected $table = 'admin_pelaporan';
      protected $primaryKey = 'id_nik';
 
 
      protected $fillable = [
         'id_nik',
-        'nama_super_admin',
+        'nama_admin_pelaporan',
         'alamat',
         'email_admin',
         'jabatan',
