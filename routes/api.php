@@ -17,8 +17,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/update-status', [AuthController::class, 'updateAccountStatus']);
     Route::get('/get-status-count', [AuthController::class, 'getAccountStatusCount']);
-    Route::get('/get-all-account', [AuthController::class, 'getMasyarakatAccount']);
-    Route::post('/get-account-status',[AuthController::class, 'getAccountStatus']);
+    Route::get('/get-all-account', [AuthController::class, 'getAllAccount']);
+    Route::post('/update-role', [AuthController::class, 'updateAccountRole']);
+    Route::post('/get-status', [AuthController::class, 'getAccountByStatus']);
+    Route::delete('/delete-user', [AuthController::class, 'deleteUser']);
 
     Route::get('/show-all-laporan', [LaporanController::class, 'showAllLaporan']);
     Route::get('/show-laporan-masuk', [LaporanController::class, 'showToday']);

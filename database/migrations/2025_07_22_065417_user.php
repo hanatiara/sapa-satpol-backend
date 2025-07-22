@@ -11,22 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admin_pelaporan', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id("id_nik");
-            $table->string("nama_admin_pelaporan");
+            $table->string("nama");
             $table->string("password");
-            $table->string("email_admin");
-            $table->string("jabatan");
+            $table->string("email");
             $table->string("alamat");
+            $table->string("account_status");
+            $table->string("account_role");
+            $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('admin_pelaporan');
+        Schema::dropIfExists('users');
     }
 };
