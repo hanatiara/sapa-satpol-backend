@@ -45,8 +45,18 @@ class LaporanController extends Controller
 
     }
 
-    public function countLaporan() {
-        return Laporan::count();
+    public function showLaporanById (Request $request) {
+        $id_laporan = $request->id_laporan;
+        $relations = array_values($this->relationMap);
+        $laporan = Laporan::with($relations)->find($id_laporan);
+
+        if(!$laporan) {
+            return response()->json(['message' => 'Laporan not found'], 404);
+        }
+
+        return response()->json([
+            'laporan' => $laporan,
+        ], 200);
     }
 
     public function updateLaporan(Request $request, LaporanHandlerResolver $resolver) {

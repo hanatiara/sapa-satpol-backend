@@ -10,4 +10,5 @@ interface LaporanHandlerInterface
     public function update(Laporan $laporan, array $data);
 
     public function delete(Laporan $laporan): void;
+
 }

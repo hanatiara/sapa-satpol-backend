@@ -13,20 +13,22 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    protected $statusMap = [
+        'unvalidated',
+        'validated',
+        'rejected'
+    ];
+
+
     public function register(Request $request) {
         $request->validate([
-            // 'id_nik' => 'required|string',
+            'id_nik' => 'required|string',
             'email_masyarakat' => 'required|string|email|unique:masyarakat',
             'password' => 'required|string|min:6',
         ]);
 
-        // $nama = "user_" . uniqid();
-        // $id_nik = $request->id_nik;
-
-        $id_nik = rand(1000, 9999);;
-
         $masyarakat = Masyarakat::create([
-            'id_nik' => $id_nik,
+            'id_nik' => $request->id_nik,
             'nama_masyarakat' => $request->nama_masyarakat, // darimana (?)
             'alamat' => "", //ditto
             'email_masyarakat' => $request->email_masyarakat,
@@ -40,7 +42,7 @@ class AuthController extends Controller
         return response()->json([
             'masyarakat' => $masyarakat,
             'token' => $token,
-            'message' => $message
+            'message' => $message,
         ], 201);
     }
 
@@ -61,6 +63,7 @@ class AuthController extends Controller
                 'user' => $masyarakat,
                 'token' => $token,
                 'message' => 'Login berhasil sebagai masyarakat',
+                'role' => 'masyarakat'
             ]);
         }
 
@@ -75,6 +78,7 @@ class AuthController extends Controller
                 'user' => $admin_pelaporan,
                 'token' => $token,
                 'message' => 'Login berhasil sebagai admin pelaporan',
+                'role' => 'admin_pelaporan'
             ]);
         }
 
@@ -88,7 +92,7 @@ class AuthController extends Controller
                 'user_type' => 'admin_masyarakat',
                 'user' => $admin_masyarakat,
                 'token' => $token,
-                'message' => 'Login berhasil sebagai admin masyarakat',
+                'role' => 'admin_masyarakat'
             ]);
         }
 
@@ -102,7 +106,7 @@ class AuthController extends Controller
                 'user_type' => 'super_admin',
                 'user' => $super_admin,
                 'token' => $token,
-                'message' => 'Login berhasil sebagai super admin',
+                'role' => 'super_admin'
             ]);
         }
 
@@ -117,6 +121,7 @@ class AuthController extends Controller
                 'user' => $admin_kepala,
                 'token' => $token,
                 'message' => 'Login berhasil sebagai admin kepala',
+                'role' => 'admin_kepala'
             ]);
         }
 
@@ -141,18 +146,64 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Status akun berhasil diperbarui.',
             'masyarakat' => $masyarakat,
-        ]);
+        ], 200);
+    }
+
+    public function getAccountStatusCount() {
+        $masyarakat = Masyarakat::count();
+        $rejected = Masyarakat::where('account_status', 'rejected')->count();
+        $accepted = Masyarakat::where('account_status', 'validated')->count();
+
+        return response()->json([
+            'all' => $masyarakat,
+            'rejected' => $rejected,
+            'validated' => $accepted
+        ], 200);
+    }
+
+    public function getMasyarakatAccount() {
+        $masyarakat = Masyarakat::select('nama_masyarakat', 'email_masyarakat', 'account_status')->get();
+
+        return response()->json([
+            'masyarakat' => $masyarakat
+        ], 200);
+
+    }
+
+    public function getAccountStatus(Request $request) {
+        $status = $request->status;
+        $masyarakat = Masyarakat::select('nama_masyarakat', 'email_masyarakat', 'id_nik')
+                                    ->where('account_status', $status)
+                                    ->get();
+
+        return response()->json([
+            'masyarakat' => $masyarakat
+        ], 200);
     }
 
     public function UpdateProfile(Request $request) {
         $id_nik = $request->id_nik;
+        // Edit as Masyrakat
+        $masyarakat = Masyarakat::where('id_nik', $id_nik)->first();
 
+        if (!$masyarakat) {
+            return response()->json([
+                'message' => 'Data masyarakat tidak ditemukan.'
+            ], 404);
+        }
 
+        // $masyarakat->nama_masyarakat
 
     }
 
-    public function logout() {
 
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'message' => 'Logout berhasil.'
+        ]);
     }
 
 }
