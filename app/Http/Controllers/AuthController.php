@@ -21,7 +21,7 @@ class AuthController extends Controller
 
         $user = User::create([
             'id_nik' => $request->id_nik,
-            'nama' => "",
+            'nama' => $request->nama,
             'alamat' => "",
             'email' => $request->email,
             'password' => bcrypt($request->password),
@@ -107,6 +107,9 @@ class AuthController extends Controller
         $admin_pelaporan = User::where('account_role', 'admin_pelaporan')->count();
         $admin_kepala = User::where('account_role', 'admin_kepala')->count();
         $user_biasa = User::where('account_role', 'user_biasa')->count();
+        $nonaktif = User::where('account_status', 'nonaktif')->count();
+        $super_admin = SuperAdmin::get()->count();
+        $pending = User::where('account_status','menunggu')->count();
 
         return response()->json([
             'all' => $user,
@@ -114,7 +117,10 @@ class AuthController extends Controller
             'distujui' => $accepted,
             'admin_pelaporan' => $admin_pelaporan,
             'admin_kepala' => $admin_kepala,
-            'user_biasa' => $user_biasa
+            'user_biasa' => $user_biasa,
+            'nonaktif' => $nonaktif,
+            'super_admin' => $super_admin,
+            'pending' => $pending
         ], 200);
     }
 

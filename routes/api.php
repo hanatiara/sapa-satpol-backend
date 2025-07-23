@@ -16,6 +16,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::post('/update-status', [AuthController::class, 'updateAccountStatus']);
+    // Get User status count
     Route::get('/get-status-count', [AuthController::class, 'getAccountStatusCount']);
     Route::get('/get-all-account', [AuthController::class, 'getAllAccount']);
     Route::post('/update-role', [AuthController::class, 'updateAccountRole']);
