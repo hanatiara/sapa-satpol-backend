@@ -25,7 +25,7 @@ class AuthController extends Controller
             'alamat' => "",
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'account_status' => "menunggu",
+            'account_status' => "Menunggu",
             'account_role' => "user_biasa"
         ]);
 
@@ -70,9 +70,19 @@ class AuthController extends Controller
             $token = $super_admin->createToken('admin_token')->plainTextToken;
 
             return response()->json([
-                'user' => $super_admin,
+                'user' => [
+                    "id_nik" => $super_admin->id_nik,
+                    "nama" => $super_admin->nama_super_admin,
+                    "email" => $super_admin->email_admin,
+                    "alamat" => $super_admin->alamat,
+                    "account_status" => "Disetujui",
+                    "account_role" => "root_admin",
+                    "created_at" => "2025-07-23T11:07:35.000000Z",
+                    "updated_at" => "2025-07-23T11:07:35.000000Z"
+                ],
                 'token' => $token,
-                'account_role' => 'super_admin'
+                'account_role' => "root_admin",
+                'account_status' => "Disetujui"
             ]);
         }
 
@@ -100,27 +110,41 @@ class AuthController extends Controller
         ], 200);
     }
 
+    public function getAccountById(Request $request) {
+        $user = User::where('id_nik', $request->id_nik)->first();
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'Data user tidak ditemukan.'
+            ], 404);
+        }
+
+        return response()->json([
+            'user' => $user,
+        ], 200);
+    }
+
     public function getAccountStatusCount() {
         $user = User::count();
-        $rejected = User::where('account_status', 'ditolak')->count();
-        $accepted = User::where('account_status', 'disetujui')->count();
+        $rejected = User::where('account_status', 'Ditolak')->count();
+        $accepted = User::where('account_status', 'Disetujui')->count();
         $admin_pelaporan = User::where('account_role', 'admin_pelaporan')->count();
         $admin_kepala = User::where('account_role', 'admin_kepala')->count();
-        $user_biasa = User::where('account_role', 'user_biasa')->count();
-        $nonaktif = User::where('account_status', 'nonaktif')->count();
-        $super_admin = SuperAdmin::get()->count();
-        $pending = User::where('account_status','menunggu')->count();
+        $admin_masyarakat = User::where('account_role', 'admin_masyarakat')->count();
+        $nonaktif = User::where('account_status', 'Nonaktif')->count();
+        $super_admin = SuperAdmin::count() + User::where('account_status', 'super_admin')->count();
+        $pending = User::where('account_status','Menunggu')->count();
 
         return response()->json([
             'all' => $user,
-            'ditolak' => $rejected,
-            'distujui' => $accepted,
+            'Ditolak' => $rejected,
+            'Disetujui' => $accepted,
             'admin_pelaporan' => $admin_pelaporan,
             'admin_kepala' => $admin_kepala,
-            'user_biasa' => $user_biasa,
-            'nonaktif' => $nonaktif,
+            'admin_masyarakat' => $admin_masyarakat,
+            'Nonaktif' => $nonaktif,
             'super_admin' => $super_admin,
-            'pending' => $pending
+            'Pending' => $pending
         ], 200);
     }
 
@@ -136,6 +160,12 @@ class AuthController extends Controller
     public function updateAccountRole(Request $request) {
         $id_nik = $request->id_nik;
         $user = User::where('id_nik', $id_nik)->first();
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'Data user tidak ditemukan.'
+            ], 404);
+        }
 
         $user->account_role = $request->account_role;
 
@@ -154,7 +184,7 @@ class AuthController extends Controller
         ]);
     }
 
-        public function deleteUser(Request $request) {
+    public function deleteUser(Request $request) {
         $id_nik = $request->id_nik;
 
         $user = User::where('id_nik', $id_nik)->first();
@@ -169,20 +199,35 @@ class AuthController extends Controller
     }
 
 
-    // public function UpdateProfile(Request $request) {
-    //     $id_nik = $request->id_nik;
-    //     // Edit as Masyrakat
-    //     $masyarakat = Masyarakat::where('id_nik', $id_nik)->first();
+    public function UpdateProfile(Request $request) {
+        $id_nik = $request->id_nik;
+        $user = User::where('id_nik', $id_nik)->first();
 
-    //     if (!$masyarakat) {
-    //         return response()->json([
-    //             'message' => 'Data masyarakat tidak ditemukan.'
-    //         ], 404);
-    //     }
+        if (!$user) {
+            return response()->json([
+                'message' => 'Data masyarakat tidak ditemukan.'
+            ], 404);
+        }
 
-    //     $masyarakat->nama_masyarakat
+        $validated = $request->validate([
+            'email' => 'sometimes|email|unique:users,email,' . $user->id_nik . ',id_nik',
+            'password' => 'sometimes|string|min:8',
+            'nama' => 'sometimes|string',
+            'alamat' => 'sometimes|nullable|string',
+        ]);
 
-    // }
+        if (isset($validated['password'])) {
+            $validated['password'] = bcrypt($validated['password']);
+        }
+
+        $user->update($validated);
+
+        return response()->json([
+            'message' => 'Profil berhasil diperbarui.',
+            'user' => $user,
+        ], 200);
+    }
+
 
 
     public function logout(Request $request)

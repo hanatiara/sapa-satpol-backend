@@ -17,6 +17,7 @@ class Laporan extends Model
         'id_laporan',
         'personil',
         'tanggal',
+        // 'status_kegiatan' default
     ];
 
     public function laporanKransos()

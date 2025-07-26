@@ -27,10 +27,10 @@ class UserFactory extends Factory
         'id_nik' => $this->faker->unique()->numerify('################'),
         'nama' => $this->faker->name(),
         'email' => $this->faker->unique()->safeEmail(),
-        'password' => Hash::make('password'),
+        'password' => Hash::make('12345678'),
         'alamat' => $this->faker->address(),
-        'account_status' => $this->faker->randomElement(['menunggu', 'disetujui', 'ditolak','nonaktif']),
-        'account_role' => $this->faker->randomElement(['admin_kepala','admin_pelaporan','user_biasa']),
+        'account_status' => $this->faker->randomElement(['Menunggu', 'Disetujui', 'Ditolak','Nonaktif']),
+        'account_role' => $this->faker->randomElement(['admin_kepala','admin_pelaporan','admin_masyarakat','super_admin']),
         'created_at' => now(),
         'updated_at' => now(),
         ];

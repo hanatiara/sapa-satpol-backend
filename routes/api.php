@@ -21,7 +21,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/get-all-account', [AuthController::class, 'getAllAccount']);
     Route::post('/update-role', [AuthController::class, 'updateAccountRole']);
     Route::post('/get-status', [AuthController::class, 'getAccountByStatus']);
+    Route::post('/get-user-nik', [AuthController::class, 'getAccountById']);
     Route::delete('/delete-user', [AuthController::class, 'deleteUser']);
+    Route::post('/update-user', [AuthController::class, 'updateProfile']);
 
     Route::get('/show-all-laporan', [LaporanController::class, 'showAllLaporan']);
     Route::get('/show-laporan-masuk', [LaporanController::class, 'showToday']);
