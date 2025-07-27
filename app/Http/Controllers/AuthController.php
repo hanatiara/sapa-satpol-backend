@@ -177,7 +177,11 @@ class AuthController extends Controller
 
     public function getAccountByStatus(Request $request) {
         $status = $request->account_status;
-        $user = User::where('account_status', $status)->get();
+        if($status == "notSuperAdmin") {
+            $user = User::whereNot('account_role', "super_admin")->get();
+        } else {
+            $user = User::where('account_status', $status)->get();
+        }
 
         return response()->json([
             'user' => $user,
