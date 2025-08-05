@@ -15,8 +15,6 @@ class LaporanPengamananHandler implements LaporanHandlerInterface
             'pelaksanaan_kegiatan' => $data['pelaksanaan_kegiatan'] ?? null,
             'temuan' => $data['temuan'] ?? null,
             'tindakan' => $data['tindakan'] ?? null,
-            'keterangan' => $data['keterangan'] ?? null,
-            'url_dokumentasi' => $data['url_dokumentasi'] ?? null,
         ]);
     }
 
@@ -28,8 +26,6 @@ class LaporanPengamananHandler implements LaporanHandlerInterface
             'pelaksanaan_kegiatan' => $data['pelaksanaan_kegiatan'] ?? null,
             'temuan' => $data['temuan'] ?? null,
             'tindakan' => $data['tindakan'] ?? null,
-            'keterangan' => $data['keterangan'] ?? null,
-            'url_dokumentasi' => $data['url_dokumentasi'] ?? null,
         ]);
     }
 

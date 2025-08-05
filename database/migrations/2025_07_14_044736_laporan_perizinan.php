@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string("jenis_pelanggaran");
             $table->string("jenis_tindakan");
             $table->double("jumlah");
-            $table->string("url_dokumentasi");
         });
     }
 

@@ -15,10 +15,15 @@ class Laporan extends Model
 
     protected $fillable = [
         'id_laporan',
-        'personil',
+        'status',
         'tanggal',
-        // 'status_kegiatan' default
+        'keterangan'
     ];
+
+    public function user()
+    {
+        return $this->belongsToMany(User::class);
+    }
 
     public function laporanKransos()
     {

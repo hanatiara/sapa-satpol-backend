@@ -16,9 +16,6 @@ return new class extends Migration
             $table->string("lokasi_pos");
             $table->string("pelaksanaan_kegiatan");
             $table->string("temuan");
-            $table->string("keterangan");
-            // shift
-            $table->string("url_dokumentasi");
         });
     }
 

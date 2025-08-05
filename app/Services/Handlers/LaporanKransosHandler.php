@@ -16,8 +16,6 @@ class LaporanKransosHandler implements LaporanHandlerInterface
             'deskripsi' => $data['deskripsi'] ?? null,
             'jenis_tindakan' => $data['jenis_tindakan'] ?? null,
             'jumlah_pelanggar' => $data['jumlah_pelanggar'] ?? null,
-            'keterangan' => $data['keterangan'] ?? null,
-            'url_dokumentasi' => $data['url_dokumentasi'] ?? null,
         ]);
     }
 
@@ -30,8 +28,6 @@ class LaporanKransosHandler implements LaporanHandlerInterface
             'deskripsi' => $data['deskripsi'] ?? null,
             'jenis_tindakan' => $data['jenis_tindakan'] ?? null,
             'jumlah_pelanggar' => $data['jumlah_pelanggar'] ?? null,
-            'keterangan' => $data['keterangan'] ?? null,
-            'url_dokumentasi' => $data['url_dokumentasi'] ?? null,
         ]);
     }
 

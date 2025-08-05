@@ -17,8 +17,6 @@ class LaporanPkl extends Model
         'jenis_pkl',
         'jenis_pelanggaran',
         'jenis_tindakan',
-        'keterangan',
-        'url_dokumentasi',
     ];
 
     public function laporan() {

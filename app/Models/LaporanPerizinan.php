@@ -20,7 +20,6 @@ class LaporanPerizinan extends Model
         'jenis_pelanggaran',
         'jenis_tindakan',
         'jumlah',
-        'url_dokumentasi',
     ];
 
     public function laporan() {

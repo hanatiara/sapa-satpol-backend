@@ -30,4 +30,9 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function laporan()
+    {
+        return $this->belongsToMany(Laporan::class);
+    }
+
 }

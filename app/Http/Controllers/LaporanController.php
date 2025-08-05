@@ -28,7 +28,7 @@ class LaporanController extends Controller
 
         return response()->json([
             'total' => $laporan->count(),
-            'laporan' => $laporan,
+            'laporan' => $laporan, // sesuaikan dengan format di frontend
         ], 200);
     }
 
@@ -67,8 +67,8 @@ class LaporanController extends Controller
         $type = $request->type;
 
         $laporan->update([
-            'personil' => $request->personil ?? $laporan->personil,
             'tanggal' => $request->tanggal ?? $laporan->tanggal,
+            'status' => $request->status ?? $laporan->status
         ]);
 
         $handler = $resolver->resolveByType($type);
@@ -84,12 +84,12 @@ class LaporanController extends Controller
 
     public function createLaporan(Request $request, LaporanHandlerResolver $resolver) {
         $id_laporan = Str::uuid();
-        $tanggal = Carbon::now()->toDateTimeString(); // ganti dengan datepick
 
         $laporan = Laporan::create([
             'id_laporan' => $id_laporan,
-            'personil' => $request->personil,
-            'tanggal' => $tanggal,
+            'tanggal' => $request->tanggal,
+            'status' => "Belum Dilaksanakan",
+            'keterangan' => $request->keterangan ?? "",
             'type' => $request->type,
         ]);
 
@@ -130,5 +130,13 @@ class LaporanController extends Controller
         $laporan->delete();
         return response()->json(['message' => 'Laporan deleted successfully'], 200);
         }
+
+    public function addPersonil(Request $request) {
+
+    }
+
+    public function addAbsensi(Request $request) {
+        
+    }
 }
 

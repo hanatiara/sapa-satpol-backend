@@ -20,7 +20,6 @@ class LaporanPamwal extends Model
         'temuan',
         'jenis_tindakan',
         'keterangan',
-        'url_dokumentasi',
     ];
 
     public function laporan() {

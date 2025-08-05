@@ -15,8 +15,6 @@ class LaporanPklHandler implements LaporanHandlerInterface
             'jenis_pkl' => $data['jenis_pkl'] ?? null,
             'jenis_pelanggaran' => $data['jenis_pelanggaran'] ?? null,
             'jenis_tindakan' => $data['jenis_tindakan'] ?? null,
-            'keterangan' => $data['keterangan'] ?? null,
-            'url_dokumentasi' => $data['url_dokumentasi'] ?? null,
         ]);
     }
 
@@ -28,8 +26,6 @@ class LaporanPklHandler implements LaporanHandlerInterface
             'jenis_pkl' => $data['jenis_pkl'] ?? null,
             'jenis_pelanggaran' => $data['jenis_pelanggaran'] ?? null,
             'jenis_tindakan' => $data['jenis_tindakan'] ?? null,
-            'keterangan' => $data['keterangan'] ?? null,
-            'url_dokumentasi' => $data['url_dokumentasi'] ?? null,
         ]);
     }
 

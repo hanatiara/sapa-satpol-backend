@@ -17,8 +17,6 @@ class LaporanPiket extends Model
         'lokasi_pos',
         'pelaksanaan_kegiatan',
         'temuan',
-        'keterangan',
-        'url_dokumentasi',
     ];
 
     public function laporan() {

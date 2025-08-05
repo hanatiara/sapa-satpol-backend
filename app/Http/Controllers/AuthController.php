@@ -132,7 +132,7 @@ class AuthController extends Controller
         $admin_kepala = User::where('account_role', 'admin_kepala')->count();
         $admin_masyarakat = User::where('account_role', 'admin_masyarakat')->count();
         $nonaktif = User::where('account_status', 'Nonaktif')->count();
-        $super_admin = SuperAdmin::count() + User::where('account_status', 'super_admin')->count();
+        $super_admin = SuperAdmin::count() + User::where('account_role', 'super_admin')->count();
         $pending = User::where('account_status','Menunggu')->count();
 
         return response()->json([
@@ -149,7 +149,7 @@ class AuthController extends Controller
     }
 
     public function getAllAccount() {
-        $user = User::select('nama', 'email', 'account_status','id_nik','account_role')->get();
+        $user = User::select('nama', 'email', 'account_status','id_nik','account_role','created_at','updated_at')->get();
 
         return response()->json([
             'user' => $user
@@ -169,23 +169,12 @@ class AuthController extends Controller
 
         $user->account_role = $request->account_role;
 
+        $user->save();
+
         return response()->json([
             'message' => 'Role berhasil diperbarui.',
             'user' => $user,
         ], 200);
-    }
-
-    public function getAccountByStatus(Request $request) {
-        $status = $request->account_status;
-        if($status == "notSuperAdmin") {
-            $user = User::whereNot('account_role', "super_admin")->get();
-        } else {
-            $user = User::where('account_status', $status)->get();
-        }
-
-        return response()->json([
-            'user' => $user,
-        ]);
     }
 
     public function deleteUser(Request $request) {

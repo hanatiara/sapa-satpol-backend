@@ -17,8 +17,6 @@ return new class extends Migration
             $table->string("pelaksanaan_kegiatan");
             $table->string("tindakan");
             $table->string("temuan");
-            $table->string("keterangan");
-            $table->string("url_dokumentasi");
         });
     }
 

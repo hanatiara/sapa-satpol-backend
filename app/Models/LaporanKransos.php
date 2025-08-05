@@ -19,8 +19,6 @@ class LaporanKransos extends Model
         'deskripsi',
         'jenis_tindakan',
         'jumlah_pelanggar',
-        'keterangan',
-        'url_dokumentasi',
     ];
 
     public function laporan() {

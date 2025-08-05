@@ -16,8 +16,6 @@ return new class extends Migration
             $table->string("jenis_pkl");
             $table->string("jenis_pelanggaran");
             $table->string("jenis_tindakan");
-            $table->string("keterangan");
-            $table->string("url_dokumentasi");
         });
     }
 

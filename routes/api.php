@@ -20,7 +20,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/get-status-count', [AuthController::class, 'getAccountStatusCount']);
     Route::get('/get-all-account', [AuthController::class, 'getAllAccount']);
     Route::post('/update-role', [AuthController::class, 'updateAccountRole']);
-    Route::post('/get-status', [AuthController::class, 'getAccountByStatus']);
     Route::post('/get-user-nik', [AuthController::class, 'getAccountById']);
     Route::delete('/delete-user', [AuthController::class, 'deleteUser']);
     Route::post('/update-user', [AuthController::class, 'updateProfile']);

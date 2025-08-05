@@ -17,7 +17,6 @@ class LaporanPamwalHandler implements LaporanHandlerInterface
             'temuan' => $data['temuan'] ?? null,
             'jenis_tindakan' => $data['jenis_tindakan'] ?? null,
             'keterangan' => $data['keterangan'] ?? null,
-            'url_dokumentasi'=> $data['url_dokumentasi'] ?? null
         ]);
     }
 
@@ -31,7 +30,6 @@ class LaporanPamwalHandler implements LaporanHandlerInterface
             'temuan' => $data['temuan'] ?? null,
             'jenis_tindakan' => $data['jenis_tindakan'] ?? null,
             'keterangan' => $data['keterangan'] ?? null,
-            'url_dokumentasi'=> $data['url_dokumentasi'] ?? null
         ]);
     }
 

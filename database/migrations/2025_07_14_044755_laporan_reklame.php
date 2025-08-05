@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string("jenis_pelanggaran");
             $table->double("jumlah_reklame");
             $table->string("jenis_tindakan");
-            $table->string("keterangan");
-            $table->string("url_dokumentasi");
         });
     }
 

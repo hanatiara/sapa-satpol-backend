@@ -16,8 +16,6 @@ class LaporanReklameHandler implements LaporanHandlerInterface
             'jenis_pelanggaran' => $data['jenis_pelanggaran'] ?? null,
             'jumlah_reklame' => $data['jumlah_reklame'] ?? null,
             'jenis_tindakan' => $data['jenis_tindakan'] ?? null,
-            'keterangan' => $data['keterangan'] ?? null,
-            'url_dokumentasi' => $data['url_dokumentasi'] ?? null,
         ]);
 
 
@@ -32,8 +30,6 @@ class LaporanReklameHandler implements LaporanHandlerInterface
             'jenis_pelanggaran' => $data['jenis_pelanggaran'] ?? null,
             'jumlah_reklame' => $data['jumlah_reklame'] ?? null,
             'jenis_tindakan' => $data['jenis_tindakan'] ?? null,
-            'keterangan' => $data['keterangan'] ?? null,
-            'url_dokumentasi' => $data['url_dokumentasi'] ?? null,
         ]);
 
 

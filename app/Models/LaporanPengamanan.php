@@ -18,8 +18,6 @@ class LaporanPengamanan extends Model
         'pelaksanaan_kegiatan',
         'tindakan',
         'temuan',
-        'keterangan',
-        'url_dokumentasi',
     ];
 
     public function laporan() {

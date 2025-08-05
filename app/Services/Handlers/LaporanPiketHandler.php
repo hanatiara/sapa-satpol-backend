@@ -14,8 +14,6 @@ class LaporanPiketHandler implements LaporanHandlerInterface
             'lokasi_pos' => $data['lokasi_pos'] ?? null,
             'pelaksanaan_kegiatan' => $data['pelaksanaan_kegiatan'] ?? null,
             'temuan' => $data['temuan'] ?? null,
-            'keterangan' => $data['keterangan'] ?? null,
-            'url_dokumentasi' => $data['url_dokumentasi'] ?? null,
         ]);
     }
 
@@ -26,8 +24,6 @@ class LaporanPiketHandler implements LaporanHandlerInterface
             ['lokasi_pos' => $data['lokasi_pos'] ?? null,
             'pelaksanaan_kegiatan' => $data['pelaksanaan_kegiatan'] ?? null,
             'temuan' => $data['temuan'] ?? null,
-            'keterangan' => $data['keterangan'] ?? null,
-            'url_dokumentasi' => $data['url_dokumentasi'] ?? null,
         ]);
     }
 

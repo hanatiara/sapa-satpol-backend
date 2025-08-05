@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string("pelaksanaan_kegiatan");
             $table->string("temuan");
             $table->string("jenis_tindakan");
-            $table->string("keterangan");
-            $table->string("url_dokumentasi");
         });
     }
 

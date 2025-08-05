@@ -19,8 +19,6 @@ class LaporanReklame extends Model
         'jenis_pelanggaran',
         'jumlah_reklame',
         'jenis_tindakan',
-        'keterangan',
-        'url_dokumentasi',
     ];
 
     public function laporan() {
