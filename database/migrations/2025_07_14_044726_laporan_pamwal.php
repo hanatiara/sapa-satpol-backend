@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('laporan_pamwal', function (Blueprint $table) {
             $table->uuid("id_laporan");
-            $table->string("lokasi");
+            $table->string("status_kegiatan");
             $table->string("kegiatan");
             $table->string("pelaksanaan_kegiatan");
             $table->string("temuan");
-            $table->string("jenis_tindakan");
         });
     }
 

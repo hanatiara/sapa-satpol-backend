@@ -4,35 +4,45 @@ namespace App\Services\Handlers;
 
 use App\Models\Laporan;
 use App\Services\LaporanHandlerInterface;
+use App\Traits\HandlesCommonLaporanRelations;
 
 class LaporanKransosHandler implements LaporanHandlerInterface
 {
+    use HandlesCommonLaporanRelations;
     public function create(Laporan $laporan, array $data)
     {
         $laporan->laporanKransos()->create([
             'id_laporan' => $laporan->id_laporan,
             'lokasi' => $data['lokasi'] ?? null,
+            'judul'=> $data['judul'] ?? null,
             'jenis_kransos' => $data['jenis_kransos'] ?? null,
-            'deskripsi' => $data['deskripsi'] ?? null,
-            'jenis_tindakan' => $data['jenis_tindakan'] ?? null,
-            'jumlah_pelanggar' => $data['jumlah_pelanggar'] ?? null,
+            'deskripsi_kejadian' => $data['deskripsi_kejadian'] ?? null,
+            'tanggal_kejadian' => $data['tanggal_kejadian'] ?? null,
+            'waktu_kejadian' => $data['waktu_kejadian'] ?? null,
+            'status_penanganan'=> $data['status_penanganan'] ?? null,
         ]);
+
+        $this->handleCreateCommonRelations($laporan, $data);
     }
 
     public function update(Laporan $laporan, array $data)
     {
         $laporan->laporanKransos()->updateOrCreate(
             ['id_laporan' => $laporan->id_laporan],
-            ['lokasi' => $data['lokasi'] ?? null,
-            'jenis_kransos' => $data['jenis_kransos'] ?? null,
-            'deskripsi' => $data['deskripsi'] ?? null,
-            'jenis_tindakan' => $data['jenis_tindakan'] ?? null,
-            'jumlah_pelanggar' => $data['jumlah_pelanggar'] ?? null,
+            [
+            'judul'=> $data['judul'] ?? $laporan->laporanKransos->judul,
+            'jenis_kransos' => $data['jenis_kransos'] ?? $laporan->laporanKransos->jenis_kransos,
+            'deskripsi_kejadian' => $data['deskripsi_kejadian'] ?? $laporan->laporanKransos->deskripsi_kejadian,
+            'tanggal_kejadian' => $data['tanggal_kejadian'] ?? $laporan->laporanKransos->tanggal_kejadian,
+            'waktu_kejadian' => $data['waktu_kejadian'] ?? $laporan->laporanKransos->waktu_kejadian,
+            'status_penanganan'=> $data['status_penanganan'] ?? $laporan->laporanKransos->status_penanganan,
         ]);
+        $this->handleUpdateCommonRelations($laporan, $data);
     }
 
     public function delete(Laporan $laporan): void
     {
         $laporan->laporanKransos()->delete();
+        $this->handleDeleteCommonRelations($laporan);
     }
 }

@@ -14,8 +14,11 @@ return new class extends Migration
         Schema::create('laporan_pkl', function (Blueprint $table) {
             $table->uuid("id_laporan");
             $table->string("jenis_pkl");
-            $table->string("jenis_pelanggaran");
-            $table->string("jenis_tindakan");
+            $table->string("deskripsi_kejadian");
+            $table->string("judul");
+            $table->string("status_penanganan");
+            $table->string("tanggal_kejadian");
+            $table->string("waktu_kejadian");
         });
     }
 

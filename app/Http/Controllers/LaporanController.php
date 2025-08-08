@@ -8,6 +8,8 @@ use App\Models\Laporan;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Services\LaporanHandlerResolver;
+use App\Traits\HandlesCommonLaporanRelations;
+use App\Models\User;
 
 class LaporanController extends Controller
 {
@@ -22,14 +24,20 @@ class LaporanController extends Controller
     ];
 
     public function showAllLaporan() {
-        $relations = array_values($this->relationMap);
-
-        $laporan = Laporan::with($relations)->orderBy('tanggal', 'desc')->get();
-
+        $laporan = Laporan::with([
+            'personil',
+            'dokumentasi',
+            'waktu',
+            'lokasiKegiatan',
+            'pelanggar',
+            ...array_values($this->relationMap)
+        ])->get();
+    
         return response()->json([
+            'message' => 'Semua laporan berhasil diambil',
             'total' => $laporan->count(),
-            'laporan' => $laporan, // sesuaikan dengan format di frontend
-        ], 200);
+            'data' => $laporan,
+        ]);
     }
 
     public function showToday() {
@@ -46,17 +54,22 @@ class LaporanController extends Controller
     }
 
     public function showLaporanById (Request $request) {
-        $id_laporan = $request->id_laporan;
-        $relations = array_values($this->relationMap);
-        $laporan = Laporan::with($relations)->find($id_laporan);
+        $laporan = Laporan::with([
+            'personil',
+            'dokumentasi',
+            'waktu',
+            'lokasiKegiatan',
+            'pelanggar',
+            ...array_values($this->relationMap)
+        ])->find($request->id_laporan);
 
         if(!$laporan) {
             return response()->json(['message' => 'Laporan not found'], 404);
         }
 
         return response()->json([
-            'laporan' => $laporan,
-        ], 200);
+            'data' => $laporan,
+        ]);
     }
 
     public function updateLaporan(Request $request, LaporanHandlerResolver $resolver) {
@@ -68,42 +81,64 @@ class LaporanController extends Controller
 
         $laporan->update([
             'tanggal' => $request->tanggal ?? $laporan->tanggal,
-            'status' => $request->status ?? $laporan->status
+            'opd_pengampu' => $request->opd_pengampu ?? $laporan->opd_pengampu,
+            'urusan' => $request->urusan ?? $laporan->urusan,
+            'jumlah_pelanggar' => $request->jumlah_pelanggar ?? $laporan->jumlah_pelanggar,
+            'sumber_informasi' => $request->sumber_informasi ?? $laporan->sumber_informasi,
+            'lokasi' =>$request->lokasi ?? $laporan->lokasi,
+            'tindakan_lanjutan'=>$request->tindakan_lanjutan ?? $laporan->tindakan_lanjutan,
         ]);
 
         $handler = $resolver->resolveByType($type);
         $handler->update($laporan, $request->all());
 
-        $relation = $this->relationMap[$type] ?? null;
+        $relations = $this->relationMap[$type] ?? null;
 
         return response()->json([
             'message' => 'Laporan berhasil diperbarui',
-            'data' => $laporan->load([$relation]),
+            'data' => $laporan->load([
+                $relations,         
+                'personil',         
+                'dokumentasi',     
+                'waktu',           
+                'lokasiKegiatan', 
+                'pelanggar'         
+            ]),  
         ]);
     }
 
     public function createLaporan(Request $request, LaporanHandlerResolver $resolver) {
         $id_laporan = Str::uuid();
+        // dd($request->lokasi_pos);
 
         $laporan = Laporan::create([
             'id_laporan' => $id_laporan,
             'tanggal' => $request->tanggal,
-            'status' => "Belum Dilaksanakan",
-            'keterangan' => $request->keterangan ?? "",
             'type' => $request->type,
+            'keterangan' => $request->keterangan,
+            'tindakan_lanjutan' => $request->tindakan_lanjutan,
+            'lokasi' => $request->lokasi
         ]);
 
         $handler = $resolver->resolveByType($request->type);
         $handler->create($laporan, $request->all());
 
-        $relation = $this->relationMap[$request->type] ?? null;
+        $relations = $this->relationMap[$request->type] ?? null;
 
         return response()->json([
             'message' => 'Laporan berhasil dibuat',
-            'data' => $laporan->load([$relation]),
+            'data' => $laporan->load([
+                $relations,         
+                'personil',         
+                'dokumentasi',     
+                'waktu',           
+                'lokasiKegiatan',
+                'pelanggar'          
+            ]),  
         ], 201);
 
     }
+
 
     public function deleteLaporan(Request $request, LaporanHandlerResolver $resolver) {
         $laporan = Laporan::find($request->id_laporan);
@@ -131,12 +166,9 @@ class LaporanController extends Controller
         return response()->json(['message' => 'Laporan deleted successfully'], 200);
         }
 
-    public function addPersonil(Request $request) {
+    public function showPersonil(Request $request) {
 
     }
 
-    public function addAbsensi(Request $request) {
-        
-    }
 }
 

@@ -15,8 +15,9 @@ class LaporanPiket extends Model
     protected $fillable = [
         'id_laporan',
         'lokasi_pos',
-        'pelaksanaan_kegiatan',
-        'temuan',
+        'shift_piket',
+        'kejadian',
+        'status_kegiatan'
     ];
 
     public function laporan() {

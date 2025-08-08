@@ -12,21 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('notifikasi', function (Blueprint $table) {
-            $table->uuid("id_kegiatan");
-            $table->string("sub_kegiatan");
-            $table->string("lokasi");
-            $table->time("waktu_mulai");
-            $table->time("waktu_selesai");
-            $table->string("jenis_kegiatan");
-            $table->string("jenis_pelanggaran");
-            $table->string("jenis_tindakan");
-            $table->string("nama_personil");
-            $table->string("keterangan_kegiatan");
-            $table->string("media_kegiatan");
-            $table->string("nama_pelanggar");
-            $table->double("nik_pelanggar");
-            $table->string("jk_pelanggar");
-            $table->string("alamat_pelanggar");
+            $table->uuid("id_notifikasi");
+            $table->string("judul_notifikasi");
+            $table->string("keterangan");
+            $table->string("id_nik");
+            $table->time("waktu");
+            $table->string("id_laporan");
         });
     }
 

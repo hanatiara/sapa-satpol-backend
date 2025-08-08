@@ -10,10 +10,10 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 # logged users only
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/masyarakat', function (Request $request) {
-        return $request->user();
-    });
+// Route::middleware('auth:sanctum')->group(function () {
+//     Route::get('/masyarakat', function (Request $request) {
+//         return $request->user();
+//     });
 
     Route::post('/update-status', [AuthController::class, 'updateAccountStatus']);
     // Get User status count
@@ -32,7 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/show-laporan', [LaporanController::class, 'showLaporanById']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
-});
+// });
 
 
 

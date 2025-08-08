@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('laporan_perizinan', function (Blueprint $table) {
             $table->uuid("id_laporan");
-            $table->string("lokasi");
-            $table->string("nama");
+            $table->string("judul");
+            $table->string("status_penanganan");
+            $table->string("tanggal_kejadian");
+            $table->string("waktu_kejadian");
+            $table->string("nama_usaha");
             $table->string("jenis_perizinan");
-            $table->string("jenis_pelanggaran");
-            $table->string("jenis_tindakan");
-            $table->double("jumlah");
         });
     }
 

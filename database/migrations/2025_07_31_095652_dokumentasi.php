@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('dokumentasi', function (Blueprint $table) {
             $table->uuid("id_laporan");
-            $table->integer("url_dokumentasi");
+            $table->string("url_dokumentasi");
         });
     }
 
@@ -22,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists("dokumentasi");
     }
 };

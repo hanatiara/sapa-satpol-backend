@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('personil', function (Blueprint $table) {
             $table->uuid("id_laporan");
-            $table->integer("id_nik");
-            $table->status("absensi");
+            $table->unsignedBigInteger("id_nik");
+            $table->string("absensi");
         });
     }
 

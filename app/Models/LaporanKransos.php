@@ -14,14 +14,16 @@ class LaporanKransos extends Model
 
     protected $fillable = [
         'id_laporan',
-        'lokasi',
         'jenis_kransos',
-        'deskripsi',
-        'jenis_tindakan',
-        'jumlah_pelanggar',
+        'judul',
+        'tanggal_kejadian',
+        'waktu_kejadian',
+        'status_penanganan',
+        'deskripsi_kejadian'
     ];
 
     public function laporan() {
         return $this->belongsTo(Laporan::class, 'id_laporan', 'id_laporan');
     }
+
 }

@@ -32,7 +32,8 @@ class User extends Authenticatable
 
     public function laporan()
     {
-        return $this->belongsToMany(Laporan::class);
+        return $this->belongsToMany(Laporan::class, 'personil', 'id_nik', 'id_laporan')
+                    ->withPivot('absensi');
     }
 
 }

@@ -14,13 +14,13 @@ class LaporanPengamanan extends Model
 
     protected $fillable = [
         'id_laporan',
-        'lokasi',
         'pelaksanaan_kegiatan',
-        'tindakan',
         'temuan',
+        'status_kegiatan'
     ];
 
     public function laporan() {
         return $this->belongsTo(Laporan::class, 'id_laporan', 'id_laporan');
     }
+
 }

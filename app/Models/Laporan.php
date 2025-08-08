@@ -15,14 +15,46 @@ class Laporan extends Model
 
     protected $fillable = [
         'id_laporan',
-        'status',
         'tanggal',
-        'keterangan'
+        'keterangan',
+        'lokasi',        
+        //
+        'tindakan_lanjutan',
+        'opd_pengampu',
+        'urusan',
+        'jumlah_pelanggar',
+        'sumber_informasi',
     ];
 
     public function user()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function pelanggar()
+    {
+        return $this->hasMany(Pelanggar::class, 'id_laporan');
+    }
+
+    public function personil()
+    {
+        return $this->belongsToMany(User::class, 'personil', 'id_laporan', 'id_nik')
+                    ->withPivot('absensi');
+    }
+
+    public function dokumentasi()
+    {
+        return $this->hasMany(Dokumentasi::class, 'id_laporan');
+    }
+
+    public function waktu()
+    {
+        return $this->hasOne(Waktu::class, 'id_laporan');
+    }
+
+    public function lokasiKegiatan()
+    {
+        return $this->hasOne(LokasiKegiatan::class, 'id_laporan');
     }
 
     public function laporanKransos()

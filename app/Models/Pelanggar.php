@@ -4,20 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class LaporanPamwal extends Model
+class Pelanggar extends Model
 {
-    protected $table = 'laporan_pamwal';
-    protected $primaryKey = 'id_laporan';
-    protected $keyType = 'string';
-
+    protected $table = "pelanggar";
     public $timestamps = false;
 
     protected $fillable = [
         'id_laporan',
-        'status_kegiatan',
-        'kegiatan',
-        'pelaksanaan_kegiatan',
-        'temuan',
+        'nama_pelanggar'
     ];
 
     public function laporan() {

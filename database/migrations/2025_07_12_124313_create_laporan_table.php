@@ -11,11 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('laporan', function (Blueprint $table) {
+        Schema::create('laporan', callback: function (Blueprint $table) {
             $table->uuid("id_laporan");
-            $table->string("status");
             $table->dateTime("tanggal");
-            $table->string("keterangan");
+            $table->string("keterangan")->nullable();
+            $table->string("lokasi");
+
+            // diisi di edit
+            $table->string("tindakan_lanjutan")->nullable();
+            $table->string("opd_pengampu")->nullable();
+            $table->string("urusan")->nullable();
+            $table->string("sumber_informasi")->nullable();
+            $table->integer("jumlah_pelanggar")->nullable();
         });
     }
 

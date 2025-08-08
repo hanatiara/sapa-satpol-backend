@@ -14,15 +14,16 @@ class LaporanPerizinan extends Model
 
     protected $fillable = [
         'id_laporan',
-        'lokasi',
-        'nama',
-        'jenis_perizinan',
-        'jenis_pelanggaran',
-        'jenis_tindakan',
-        'jumlah',
+        'judul',
+        'status_penanganan',
+        'tanggal_kejadian',
+        'waktu_kejadian',
+        'nama_usaha',
+        'jenis_perizinan'
     ];
 
     public function laporan() {
         return $this->belongsTo(Laporan::class, 'id_laporan', 'id_laporan');
     }
+
 }

@@ -14,12 +14,16 @@ class LaporanPkl extends Model
 
     protected $fillable = [
         'id_laporan',
+        'judul',
+        'status_penanganan',
+        'tanggal_kejadian',
+        'waktu_kejadian',
         'jenis_pkl',
-        'jenis_pelanggaran',
-        'jenis_tindakan',
+        'deskripsi_kejadian'
     ];
 
     public function laporan() {
         return $this->belongsTo(Laporan::class, 'id_laporan', 'id_laporan');
     }
+
 }

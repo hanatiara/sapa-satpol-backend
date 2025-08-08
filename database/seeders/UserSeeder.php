@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->count(30)->create();
+        User::factory()->count(100)->create();
 
         DB::table('users')->insert([
             'id_nik' => '12345',
@@ -36,6 +36,18 @@ class UserSeeder extends Seeder
             'account_role' => 'admin_masyarakat',
             'account_status' => 'Disetujui',
             'password' => Hash::make('Hellohello*18'),
+            'alamat' => 'Malang',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('users')->insert([
+            'id_nik' => '12345717322',
+            'nama' => 'Admin Pelaporan',
+            'email' => 'adminpelaporan@gmail.com',
+            'account_role' => 'admin_pelaporan',
+            'account_status' => 'Disetujui',
+            'password' => Hash::make('12345678'),
             'alamat' => 'Malang',
             'created_at' => now(),
             'updated_at' => now()
