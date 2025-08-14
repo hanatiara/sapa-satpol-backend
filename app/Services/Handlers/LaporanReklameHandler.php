@@ -13,10 +13,11 @@ class LaporanReklameHandler implements LaporanHandlerInterface
     {
         $laporan->laporanReklame()->create([
             'id_laporan' => $laporan->id_laporan,
-            'status_kegiatan' => $data['status_kegiatan'] ?? null,
-            'jenis_reklame' => $data['jenis_reklame'] ?? null,
-            'jenis_pelanggaran' => $data['jenis_pelanggaran'] ?? null,
-            'jumlah_reklame' => $data['jumlah_reklame'] ?? null,
+            'status_kegiatan' => $data['status_kegiatan'] ?? "Rencana",
+            "nama_reklame"=> $data["nama_reklame"] ?? "",
+            'jenis_reklame' => $data['jenis_reklame'] ?? "",
+            'jenis_pelanggaran' => $data['jenis_pelanggaran'] ?? "",
+            'jumlah_reklame' => $data['jumlah_reklame'] ?? "",
         ]);
 
         $this->handleCreateCommonRelations($laporan, $data);
@@ -27,6 +28,7 @@ class LaporanReklameHandler implements LaporanHandlerInterface
         $laporan->laporanReklame()->updateOrCreate(
             ['id_laporan' => $laporan->id_laporan],
             ['status_kegiatan' => $data['status_kegiatan'] ?? $laporan->laporanReklame->status_kegiatan,
+            'nama_reklame' => $data['nama_reklame'] ?? $laporan->laporanReklame->nama_reklame,
             'jenis_reklame' => $data['jenis_reklame'] ?? $laporan->laporanReklame->jenis_reklame,
             'jenis_pelanggaran' => $data['jenis_pelanggaran'] ?? $laporan->laporanReklame->jenis_pelanggaran,
             'jumlah_reklame' => $data['jumlah_reklame'] ?? $laporan->laporanReklame->jumlah_reklame,

@@ -13,12 +13,13 @@ class LaporanPklHandler implements LaporanHandlerInterface
     {
         $laporan->laporanPkl()->create([
             'id_laporan' => $laporan->id_laporan,
-            'judul' => $data['judul'] ?? null,
-            'status_penanganan' => $data['status_penanganan'] ?? null,
-            'tanggal_kejadian' => $data['tanggal_kejadian'] ?? null,
-            'waktu_kejadian' => $data['waktu_kejadian'] ?? null,
-            'jenis_pkl' => $data['jenis_pkl'] ?? null,
-            'deskripsi_kejadian'=> $data['deskripsi_kejadian'] ?? null
+            'judul' => $data['judul'] ?? "",
+            'status_penanganan' => $data['status_penanganan'] ?? "menunggu",
+            'tanggal_kejadian' => $data['tanggal_kejadian'] ?? now(),
+            'waktu_kejadian' => $data['waktu_kejadian'] ?? now()->format('H:i:s'),
+            'jenis_pkl' => $data['jenis_pkl'] ?? "",
+            'deskripsi_kejadian'=> $data['deskripsi_kejadian'] ?? "",
+
         ]);
         $this->handleCreateCommonRelations($laporan, $data);
     }
@@ -33,7 +34,8 @@ class LaporanPklHandler implements LaporanHandlerInterface
             'tanggal_kejadian' => $data['tanggal_kejadian'] ?? $laporan->laporanPkl->tanggal_kejadian,
             'waktu_kejadian' => $data['waktu_kejadian'] ?? $laporan->laporanPkl->waktu_kejadian,
             'jenis_pkl' => $data['jenis_pkl'] ?? $laporan->laporanPkl->jenis_pkl,
-            'deskripsi_kejadian'=> $data['deskripsi_kejadian'] ?? $laporan->laporanPkl->deskripsi_kejadian
+            'deskripsi_kejadian'=> $data['deskripsi_kejadian'] ?? $laporan->laporanPkl->deskripsi_kejadian,
+
         ]);
         $this->handleUpdateCommonRelations($laporan, $data);
     }

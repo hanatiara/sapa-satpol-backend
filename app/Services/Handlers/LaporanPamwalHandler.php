@@ -14,9 +14,9 @@ class LaporanPamwalHandler implements LaporanHandlerInterface
     {
         $laporan->laporanPamwal()->create([
             'id_laporan' => $laporan->id_laporan,
-            'kegiatan' => $data['kegiatan'] ?? null,
-            'pelaksanaan_kegiatan' => $data['pelaksanaan_kegiatan'] ?? null,
-            'temuan' => $data['temuan'] ?? null,
+            'kegiatan' => $data['kegiatan'] ?? "",
+            'pelaksanaan_kegiatan' => $data['pelaksanaan_kegiatan'] ?? "",
+            'temuan' => $data['temuan'] ?? "",
             'status_kegiatan' => "Rencana", 
         ]);
 

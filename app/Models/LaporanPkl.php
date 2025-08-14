@@ -19,7 +19,7 @@ class LaporanPkl extends Model
         'tanggal_kejadian',
         'waktu_kejadian',
         'jenis_pkl',
-        'deskripsi_kejadian'
+        'deskripsi_kejadian',
     ];
 
     public function laporan() {

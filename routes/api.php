@@ -10,10 +10,10 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 # logged users only
-// Route::middleware('auth:sanctum')->group(function () {
-//     Route::get('/masyarakat', function (Request $request) {
-//         return $request->user();
-//     });
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/masyarakat', function (Request $request) {
+        return $request->user();
+    });
 
     Route::post('/update-status', [AuthController::class, 'updateAccountStatus']);
     // Get User status count
@@ -23,8 +23,10 @@ Route::post('/login', [AuthController::class, 'login']);
     Route::post('/get-user-nik', [AuthController::class, 'getAccountById']);
     Route::delete('/delete-user', [AuthController::class, 'deleteUser']);
     Route::post('/update-user', [AuthController::class, 'updateProfile']);
+    Route::get('/get-personil', [AuthController::class, 'getPersonil']);
 
     Route::get('/show-all-laporan', [LaporanController::class, 'showAllLaporan']);
+    Route::get('/show-all-pelanggaran', [LaporanController::class, 'showAllLaporanPelanggaran']);
     Route::get('/show-laporan-masuk', [LaporanController::class, 'showToday']);
     Route::post('/create-laporan', [LaporanController::class, 'createLaporan']);
     Route::post('/update-laporan', [LaporanController::class, 'updateLaporan']);
@@ -32,7 +34,12 @@ Route::post('/login', [AuthController::class, 'login']);
     Route::post('/show-laporan', [LaporanController::class, 'showLaporanById']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
-// });
+    Route::get('/config', function () {
+        return response()->json([
+            'base_url' => config('app.url') . '/storage/'
+        ]);
+    });
+});
 
 
 

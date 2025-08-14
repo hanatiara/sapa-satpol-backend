@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('laporan_piket', function (Blueprint $table) {
             $table->uuid("id_laporan");
             $table->string("status_kegiatan");
-            $table->string("lokasi_pos");
             $table->string("shift_piket");
             $table->string("kejadian");
         });

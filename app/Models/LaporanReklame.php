@@ -15,6 +15,7 @@ class LaporanReklame extends Model
     protected $fillable = [
         'id_laporan',
         'status_kegiatan',
+        'nama_reklame',
         'jenis_reklame',
         'jenis_pelanggaran',
         'jumlah_reklame',

@@ -23,10 +23,10 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $accountRole = $this->faker->randomElement(['admin_kepala','admin_pelaporan','admin_masyarakat','super_admin']);
+        $accountRole = $this->faker->randomElement(['admin_kepala','admin_pelaporan','admin_masyarakat','super_admin','masyarakat']);
 
         // Only admin_masyarakat can have "Ditolak" and "Menunggu" status
-        if ($accountRole === 'admin_masyarakat') {
+        if ($accountRole === 'masyarakat') {
             $accountStatus = $this->faker->randomElement(['Menunggu', 'Ditolak', 'Disetujui', 'Nonaktif']);
         } else {
             $accountStatus = $this->faker->randomElement(['Disetujui', 'Nonaktif']);

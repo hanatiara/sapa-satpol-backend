@@ -16,6 +16,7 @@ return new class extends Migration
             $table->dateTime("tanggal");
             $table->string("keterangan")->nullable();
             $table->string("lokasi");
+            $table->bigInteger("id_nik");
 
             // diisi di edit
             $table->string("tindakan_lanjutan")->nullable();

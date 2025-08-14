@@ -7,6 +7,7 @@ use App\Models\SuperAdmin;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -26,7 +27,9 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'account_status' => "Menunggu",
-            'account_role' => "user_biasa"
+            'account_role' => "masyarakat",
+            'created_at'     => Carbon::now('Asia/Jakarta'),
+            'updated_at'     => Carbon::now('Asia/Jakarta'),
         ]);
 
         $token = $user->createToken('api_token')->plainTextToken;
@@ -134,6 +137,7 @@ class AuthController extends Controller
         $nonaktif = User::where('account_status', 'Nonaktif')->count();
         $super_admin = SuperAdmin::count() + User::where('account_role', 'super_admin')->count();
         $pending = User::where('account_status','Menunggu')->count();
+        $masyarakat = User::where('account_role', 'masyarakat')->count();
 
         return response()->json([
             'all' => $user,
@@ -144,6 +148,7 @@ class AuthController extends Controller
             'admin_masyarakat' => $admin_masyarakat,
             'Nonaktif' => $nonaktif,
             'super_admin' => $super_admin,
+            'masyarakat' => $masyarakat,
             'Pending' => $pending
         ], 200);
     }
@@ -221,7 +226,13 @@ class AuthController extends Controller
         ], 200);
     }
 
+    public function getPersonil() {
+        $user = User::whereIn('account_role', ['admin_pelaporan', 'admin_masyarakat'])->get();
 
+        return response()->json([
+            'user' => $user
+        ], 200);
+    }
 
     public function logout(Request $request)
     {

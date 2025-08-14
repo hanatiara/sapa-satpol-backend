@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("deskripsi_kejadian");
             $table->string("judul");
             $table->string("status_penanganan");
-            $table->string("tanggal_kejadian");
+            $table->dateTime("tanggal_kejadian");
             $table->string("waktu_kejadian");
         });
     }

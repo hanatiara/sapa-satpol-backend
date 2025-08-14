@@ -13,9 +13,9 @@ class LaporanPengamananHandler implements LaporanHandlerInterface
     {
         $laporan->laporanPengamanan()->create([
             'id_laporan' => $laporan->id_laporan,
-            'pelaksanaan_kegiatan' => $data['pelaksanaan_kegiatan'] ?? null,
-            'temuan' => $data['temuan'] ?? null,
-            'status_kegiatan'=> $data['status_kegiatan'] ?? null,
+            'pelaksanaan_kegiatan' => $data['pelaksanaan_kegiatan'] ?? "",
+            'temuan' => $data['temuan'] ?? "",
+            'status_kegiatan'=> $data['status_kegiatan'] ?? "Rencana",
         ]);
 
         $this->handleCreateCommonRelations($laporan, $data);

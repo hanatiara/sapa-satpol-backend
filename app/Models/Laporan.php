@@ -15,6 +15,7 @@ class Laporan extends Model
 
     protected $fillable = [
         'id_laporan',
+        'id_nik',
         'tanggal',
         'keterangan',
         'lokasi',        
@@ -29,6 +30,11 @@ class Laporan extends Model
     public function user()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function assignedUsers()
+    {
+        return $this->belongsTo(User::class, 'id_nik', 'id_nik');
     }
 
     public function pelanggar()

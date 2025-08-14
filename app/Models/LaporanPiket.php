@@ -14,7 +14,6 @@ class LaporanPiket extends Model
 
     protected $fillable = [
         'id_laporan',
-        'lokasi_pos',
         'shift_piket',
         'kejadian',
         'status_kegiatan'
@@ -22,5 +21,10 @@ class LaporanPiket extends Model
 
     public function laporan() {
         return $this->belongsTo(Laporan::class, 'id_laporan', 'id_laporan');
+    }
+
+    public function lokasiPos()
+    {
+        return $this->hasMany(LokasiPos::class, 'id_laporan');
     }
 }

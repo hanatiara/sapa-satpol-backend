@@ -19,7 +19,8 @@ class LaporanPerizinan extends Model
         'tanggal_kejadian',
         'waktu_kejadian',
         'nama_usaha',
-        'jenis_perizinan'
+        'jenis_perizinan',
+        'deskripsi_kejadian',
     ];
 
     public function laporan() {

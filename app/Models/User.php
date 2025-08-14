@@ -36,4 +36,9 @@ class User extends Authenticatable
                     ->withPivot('absensi');
     }
 
+    public function assignedlaporan()
+    {
+        return $this->hasMany(Laporan::class, 'id_nik', 'id_nik');
+    }
+
 }

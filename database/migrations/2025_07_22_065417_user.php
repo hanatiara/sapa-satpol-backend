@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string("alamat");
             $table->string("account_status");
             $table->string("account_role");
-            $table->timestamps();
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable();
         });
     }
 

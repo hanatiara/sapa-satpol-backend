@@ -27,4 +27,18 @@ class Handler extends ExceptionHandler
     {
         return response()->json(['message' => 'Unauthenticated.'], 401);
     }
+
+    public function render($request, Throwable $e)
+{
+    // If request expects JSON (like your API)
+    if ($request->expectsJson()) {
+        return response()->json([
+            'error' => $e->getMessage(),
+            'trace' => config('app.debug') ? $e->getTrace() : [],
+        ], 500);
+    }
+
+    return parent::render($request, $e);
+}
+
 }

@@ -52,5 +52,65 @@ class UserSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        DB::table('users')->insert([
+            'id_nik' => '1343423423423111',
+            'nama' => 'Dario Keebler',
+            'email' => 'dario.keebler@example.net',
+            'account_role' => 'admin_masyarakat',
+            'account_status' => 'Disetujui',
+            'password' => Hash::make('12345678'),
+            'alamat' => 'Malang',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('users')->insert([
+            'id_nik' => '1343423423423112',
+            'nama' => 'Keeling Easter',
+            'email' => 'keeling.easter@example.com',
+            'account_role' => 'admin_pelaporan',
+            'account_status' => 'Disetujui',
+            'password' => Hash::make('12345678'),
+            'alamat' => 'Malang',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('users')->insert([
+            'id_nik' => '1343423423423113',
+            'nama' => 'H. West',
+            'email' => 'hwest@example.com',
+            'account_role' => 'admin_kepala',
+            'account_status' => 'Disetujui',
+            'password' => Hash::make('12345678'),
+            'alamat' => 'Malang',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('users')->insert([
+            'id_nik' => '1343423423423114',
+            'nama' => 'Jacky Maroon',
+            'email' => 'jacky59@example.net',
+            'account_role' => 'masyarakat',
+            'account_status' => 'Disetujui',
+            'password' => Hash::make('12345678'),
+            'alamat' => 'Malang',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('users')->insert([
+            'id_nik' => '1343423423423115',
+            'nama' => 'Lazaro',
+            'email' => 'lazaro66@example.com',
+            'account_role' => 'super_admin',
+            'account_status' => 'Disetujui',
+            'password' => Hash::make('12345678'),
+            'alamat' => 'Malang',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

@@ -12,12 +12,13 @@ class LaporanPerizinanHandler implements LaporanHandlerInterface
     {
         $laporan->laporanPerizinan()->create([
             'id_laporan' => $laporan->id_laporan,
-            'judul' => $data['judul'] ?? null,
-            'status_penanganan' => $data['status_penanganan'] ?? null,
-            'tanggal_kejadian' => $data['tanggal_kejadian'] ?? null,
-            'waktu_kejadian' => $data['waktu_kejadian'] ?? null,
-            'nama_usaha' => $data['nama_usaha'] ?? null,
-            'jenis_perizinan' => $data['jenis_perizinan'] ?? null,
+            'judul' => $data['judul'] ?? "",
+            'status_penanganan' => $data['status_penanganan'] ?? "menunggu",
+            'tanggal_kejadian' => $data['tanggal_kejadian'] ?? now(),
+            'waktu_kejadian' => $data['waktu_kejadian'] ?? now()->format('H:i:s'),
+            'nama_usaha' => $data['nama_usaha'] ?? "",
+            'jenis_perizinan' => $data['jenis_perizinan'] ?? "",
+            'deskripsi_kejadian'=> $data['deskripsi_kejadian'] ?? "",
         ]);
 
         $this->handleCreateCommonRelations($laporan, $data);
@@ -34,6 +35,7 @@ class LaporanPerizinanHandler implements LaporanHandlerInterface
             'waktu_kejadian' => $data['waktu_kejadian'] ?? $laporan->laporanPerizinan->waktu_kejadian,
             'nama_usaha' => $data['nama_usaha'] ?? $laporan->laporanPerizinan->nama_usaha,
             'jenis_perizinan' => $data['jenis_perizinan'] ?? $laporan->laporanPerizinan->jenis_perizinan,
+            'deskripsi_kejadian'=> $data['deskripsi_kejadian'] ?? $laporan->laporanPerizinan->deskripsi_kejadian,
         ]);
 
         $this->handleUpdateCommonRelations($laporan, $data);
